@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+while :; do
+	xdotool mousemove_relative -- $(( $RANDOM % 2 - 1)) $((RANDOM % 2 - 1));
+	sleep 5;
+done

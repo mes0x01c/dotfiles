@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# ~/.bashrc
+# Syed M. <mes0x01c>
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+LS_COLORS=$LS_COLORS:'di=1;36:'
+
+# Exports
+export GPG_TTY=$(tty)
+export HISTCONTROL=ignoreboth
+export LS_COLORS
+export TERM='xterm-256color'
+
+# shopts
+# shopt -s autocd 2>/dev/null
+shopt -s globstar
+
+# because why not?
+set -o noclobber
+stty -ixon
+
+umask 007
+
+# z support to list recent dirs
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+
+# Functions
+mkd() {
+	mkdir -p "$@"
+	cd "$@" || exit
+}
+
+fc-sort() {
+	fc-list "$@" --format="%{family[0]}\n" | sort | uniq	
+}
+
+goals() {
+	tail -n +6 ~/Dropbox/org/goals.txt | less
+}
+
+# aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias iddqd='sudo -i'
+alias less='less -R'
+alias emacs='emacsclient -a "" -c'
+alias ls='ls -1 --color=always --quoting-style=literal -F'
+alias ll='ls -al'
+
+# safety
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -iv'
+alias mkdir='mkdir -p'
+alias grep='grep --color=auto'
+alias py='python'
+alias fzf='fzf --height 70% --layout=reverse --border'
+alias b='buku --suggest'
+
+# taken from https://stackoverflow.com/users/775954/matthias-braun  
+alias cleanup_packages='(set -x; sudo pacman -Rs $(pacman -Qdtq))'
+
+PS1='\[\e[33;1m\]\u\[\e[33m\]@\[\e[33m\]\h\[\e[33m\]:\[\e[33m\] \[\e[31m\]\W\[\e[0m\]\$ '
+eval "$(uv generate-shell-completion bash)"
+
+# starship
+eval "$(starship init bash)"
+
+# fetching 
+fastfetch && printf "\n\n"

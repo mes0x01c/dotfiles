@@ -1,0 +1,55 @@
+"---------------------------------------
+" file:      ~/.vimrc
+" author:    Syed M. {mes0x01c}
+"---------------------------------------
+set nocompatible
+
+syntax on
+filetype plugin on 
+filetype indent on
+
+set belloff=all
+
+set t_Co=256
+set number
+set ruler
+set autoindent
+set showmatch
+
+set hlsearch
+set incsearch 	
+set ignorecase
+set smartcase
+" set nohlsearch
+
+" set nobackup
+set directory=~/.vim/tmp
+set backupdir=~/.vim/tmp
+set laststatus=2
+set clipboard+=unnamed
+set noshowmode
+set backspace=indent,eol,start
+set encoding=utf-8
+" set spell
+set spelllang=en
+set spellfile=~/.vim/spell/en.utf-8.add
+
+nnoremap <C-l> :nohlsearch<CR><C-l> 
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-airline/vim-airline'
+
+call plug#end()
+
+let g:airline_detect_spell = 0
+let g:airline_powerline_fonts=1
+let g:is_posix=1
+let g:loaded_mathparen=1              " disable parenthesis hlight
+
+" {{{ Auto commands
+augroup vimsmh
+	autocmd!
+augroup END
+autocmd vimsmh BufRead,BufNewFile *.tex,*.md,*.txt set spell
+" }}} 
+runtime! ftplugin/man.vim
