@@ -103,20 +103,6 @@
 (diminish 'which-key-mode)
 (recentf-mode 1)
 
-;; markdown
-(use-package markdown-mode
-  :defer t
-  :commands gfm-mode markdown-mode
-  :mode
-  ("'README\\.md\\'" . gfm-mode)
-  ("'\\.md\\'" .  markdown-mode)
-  :bind (:map markdown-mode-map
-	      ("C-c C-q" . markdown-do))
-  :custom
-  (markdown-header-scaling t)
-  (markdown-hide-urls t)
-  (markdown-fontify-code-blocks-natively t))
-
 ;; spell-checking && dictionary
 (setq-default ispell-program-name "aspell")
 (setq dictionary-server "localhost")
