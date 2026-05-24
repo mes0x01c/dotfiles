@@ -13,7 +13,7 @@
 
 (add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1)))
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-
+(add-hook 'markdown-mode-hook 'eglot-ensure)
 ;; c/cpp
 (setq c-default-style "stroustrup")
 (setq c-basic-indent 4)
@@ -95,6 +95,11 @@
    :config
    (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
+
+;; rumdl integration
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+	       '(markdown-mode . ("rumdl" "server"))))
 
 (provide 'prog-init)
 
