@@ -14,6 +14,7 @@
 (add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1)))
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'markdown-mode-hook 'eglot-ensure)
+
 ;; c/cpp
 (setq c-default-style "stroustrup")
 (setq c-basic-indent 4)
@@ -30,19 +31,15 @@
 
 ;; completion in region
 (use-package corfu
-  :ensure t
-  :commands (corfu-mode global-corfu-mode)
-
-  :hook ((prog-mode . corfu-mode)
-	 (eshell-mode . corfu-mode))
-
+  :hook (after-init . global-corfu-mode)
   :custom
-  (corfu-auto t)
+  (corfu-cycle t)
   ;; Hide commands in M-x
   (read-extended-command-predicate #'command-completion-default-include-p)
-
+  (corfu-preview-current nil)
   (tab-always-indent 'complete)
-
+  (corfu-quit-no-match t)
+  (corfu-quit-at-boundary t)
   (text-mode-ispell-word-completion nil)
 
   :bind (:map corfu-map
@@ -50,12 +47,12 @@
 	      ("TAB"      .  corfu-insert)
 	      ("<tab>"    .  corfu-insert)
 	      ("C-p"      .  corfu-previous))
-
   :config
-  (global-corfu-mode))
+  (setq corfu-popupinfo-mode '(1.25 . 0.5))
+  (corfu-popupinfo-mode 1))
 
 (use-package cape
-  :ensure t
+  :defer t
   :bind (("C-c p d" . cape-dabbrev)
 	 ("C-c p f" . cape-file)
 	 ("C-c p i" . cape-dict))
