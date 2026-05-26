@@ -35,11 +35,16 @@
 ;; personal info
 (setq user-full-name "Syed M.")
 
-;; font
-(add-to-list 'default-frame-alist '(font . "IosevkaTerm Nerd Font Mono"))
-(set-face-attribute 'default t
-		    :font "IosevkaTerm Nerd Font Mono"
-		    :height 121)
+;; fonts
+(set-face-attribute 'default nil
+		    :font "Ioskeley Mono"
+		    :height 115)
+
+(set-face-attribute 'variable-pitch nil
+		    :family "Iosevka Aile"
+		    :height 115)
+
+(add-hook 'markdown-mode-hook 'variable-pitch-mode)
 
 ;; font for Urdu text
 (set-fontset-font t 'arabic (font-spec :family "Gulzar" :size 20))
@@ -128,7 +133,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(anaconda-mode avy base16-theme cape corfu diminish flycheck ht
+   '(anaconda-mode avy cape corfu diminish flycheck ht
 		   htmlize keycast marginalia markdown-mode meow
 		   mood-line orderless org-journal org-modern org-node
 		   org-superstar ts typescript-mode vertico yasnippet-snippets)))

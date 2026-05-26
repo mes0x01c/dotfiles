@@ -57,12 +57,13 @@
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
 
-;; (use-package org-modern
-;;   :defer t
-;;   :hook (org-mode . org-modern-mode)
-;;   :custom
-;;   (org-modern-star '("●" "○" "•" "◦"))
-;;   (org-modern-todo nil))
+;; beautifying
+(use-package org-modern
+  :defer t
+  :hook (org-mode . org-modern-mode)
+  :custom
+  (org-modern-star '("●" "○" "•" "◦"))
+  (org-modern-todo nil))
 
 (use-package org-journal
   :ensure t
@@ -76,6 +77,7 @@
 ;; hooks
 (eval-after-load "org"
   (add-hook 'org-add-hook 'my/modify-org-done-face))
+(add-hook 'org-mode-hook 'variable-pitch-mode)
 
 (provide 'org-init)
 
