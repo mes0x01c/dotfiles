@@ -24,10 +24,6 @@ stty -ixon
 
 umask 007
 
-# z support to list recent dirs
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
-
-
 # Functions
 mkd() {
 	mkdir -p "$@"
@@ -71,6 +67,9 @@ eval "$(uv generate-shell-completion bash)"
 
 # starship
 eval "$(starship init bash)"
+
+# zoxidde
+eval "$(zoxide init bash)"
 
 # fetching 
 fastfetch && printf "\n\n"
